@@ -1,10 +1,13 @@
 package hello.core.beanfind;
 
 import hello.core.AppConfig;
+import hello.core.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Map;
 
 class ApplicationContextInfoTest {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -18,6 +21,10 @@ class ApplicationContextInfoTest {
             System.out.println("name  = " + beanDefinitionName + ", object = "+bean);
         }
         System.out.println("---------------------------------------------------------------------");
+        Map<String, MemberRepository> beansOFType = ac.getBeansOfType(MemberRepository.class);
+        for (String key : beansOFType.keySet()) {
+            System.out.println("key = "+key+",  value = "+beansOFType.get(key));
+        }
     }
 
     @Test
