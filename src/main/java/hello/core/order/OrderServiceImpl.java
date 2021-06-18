@@ -3,14 +3,16 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
-//    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();//구현체에 의존
-//    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();//구현체에 의존
-//      private final MemberRepository memberRepository = new MemoryMemberRepository();//구현체에 의존
-    private MemberRepository memberRepository;
-    private DiscountPolicy discountPolicy;
 
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
@@ -22,5 +24,10 @@ public class OrderServiceImpl implements OrderService{
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+
+    //테스트용
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }
