@@ -17,7 +17,7 @@ public class AutowiredTest {
     }
 
     static class TestBean{
-        @Autowired(required = false)//(required = false)일때 Member라는 bean이없으므로 이 메소드 자체가 호출이 안된다.
+        @Autowired(required = false)//(required = false)일때 Member라는 bean이 없으므로 이 메소드 자체가 호출이 안된다.
         public void setNoBean1(Member noBean1){
             System.out.println("noBean1 = "+noBean1);
         }
@@ -33,3 +33,7 @@ public class AutowiredTest {
         }
     }
 }
+
+
+
+
