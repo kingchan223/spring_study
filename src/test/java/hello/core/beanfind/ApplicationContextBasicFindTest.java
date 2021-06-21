@@ -4,17 +4,20 @@ import hello.core.AppConfig;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 
+import hello.core.order.OrderService;
+import hello.core.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplicationContextBasicFindTest {
-    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+   ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
     @Test
     @DisplayName("빈 이름으로 조회")
@@ -24,6 +27,8 @@ public class ApplicationContextBasicFindTest {
         System.out.println("memberService:"+memberService.getClass());
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
+
+
 
     @Test
     @DisplayName("이름없이 타입으로만 조회")
@@ -38,6 +43,15 @@ public class ApplicationContextBasicFindTest {
         MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class);
         System.out.println("memberService:"+memberService);
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test
+    @DisplayName("빈 이름으로 조회")
+    void findBeanByName3(){
+        OrderService orderService = ac.getBean("orderService", OrderService.class);
+        System.out.println("orderService:"+orderService);
+        System.out.println("orderService:"+orderService.getClass());
+        assertThat(orderService).isInstanceOf(OrderServiceImpl.class);
     }
 
     //실패 테스트
