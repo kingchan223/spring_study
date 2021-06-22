@@ -1,5 +1,7 @@
 package hello.core.lifecycle;
 
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -24,7 +26,7 @@ public class NetworkClient{
     }
     @PostConstruct
     public void init() throws Exception {
-        System.out.println("inti()");
+        System.out.println("init()");
         connect();
         call("연결 메세지");
     }
