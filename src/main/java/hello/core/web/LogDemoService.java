@@ -11,7 +11,7 @@ public class LogDemoService {
     private final MyLogger myLogger;
 
     public void logic(String id) {
-        System.out.println(myLogger);
+//        System.out.println(myLogger);
         myLogger.log("service id = "+id);
     }
 }

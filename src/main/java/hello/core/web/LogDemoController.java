@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    //이렇게 되면 MyLogger가 아니라, MyLogger를 DL할 수 있는 객체가 의존성으로 주입된다.
     private final MyLogger myLogger;
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request){
         String requestUrl = request.getRequestURL().toString();
+        System.out.println("myLogger = "+myLogger.getClass());
         myLogger.setRequestURL(requestUrl);
-        System.out.println(myLogger);
+//        System.out.println(myLogger);
         myLogger.log("controller test");
         logDemoService.logic("testId");
         return "OK";
